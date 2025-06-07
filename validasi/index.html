@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validasi Form dengan Bootstrap dan jQuery</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Form Validasi</h2>
+    
+    <form id="formValidation" novalidate>
+        <div class="mb-3">
+            <label for="nama" class="form-label">Nama</label>
+            <input type="text" class="form-control" id="nama" placeholder="Masukkan nama">
+            <div class="invalid-feedback">
+                Nama tidak boleh kosong.
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS Bundle (termasuk Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#formValidation').on('submit', function (e) {
+            e.preventDefault(); // Mencegah form submit langsung
+
+            var nama = $('#nama').val().trim();
+
+            if (nama === '') {
+                $('#nama').addClass('is-invalid');
+            } else {
+                $('#nama').removeClass('is-invalid');
+                alert('Form berhasil dikirim! Nama: ' + nama);
+            }
+        });
+
+        // Saat user mengetik, hilangkan error
+        $('#nama').on('input', function () {
+            if ($(this).val().trim() !== '') {
+                $(this).removeClass('is-invalid');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
